@@ -21,7 +21,7 @@ import ru.mavrinvladislav.shifttask2025.core.common.EventBusController
 import ru.mavrinvladislav.shifttask2025.core.common.decompose.componentScope
 import ru.mavrinvladislav.shifttask2025.core.presentation.AppEvent
 import ru.mavrinvladislav.shifttask2025.main_screen.DefaultMainComponent
-import ru.mavrinvladislav.shifttask2025.splash.splash.presentation.DefaultSplashComponent
+import ru.mavrinvladislav.shifttask2025.splash.presentation.DefaultSplashComponent
 
 class DefaultRootComponent @AssistedInject constructor(
     private val eventBusController: EventBusController,
@@ -48,6 +48,7 @@ class DefaultRootComponent @AssistedInject constructor(
 
     init {
         scope.launch {
+            //Проверка на входе, есть ли токен
             isAuthorizedUseCase()
                 .collectLatest { authState ->
                     when (authState) {
@@ -74,6 +75,7 @@ class DefaultRootComponent @AssistedInject constructor(
     }
 
     private fun onAuthorized() {
+        //Удаляем Authorization и восстанавливаем стек
         navigation.bringToFront(RootConfig.Main)
     }
 

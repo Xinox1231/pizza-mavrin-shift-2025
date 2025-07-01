@@ -1,4 +1,4 @@
-package ru.mavrinvladislav.shifttask2025.splash.splash.presentation
+package ru.mavrinvladislav.shifttask2025.splash.presentation
 
 import com.arkivanov.decompose.ComponentContext
 import dagger.assisted.Assisted

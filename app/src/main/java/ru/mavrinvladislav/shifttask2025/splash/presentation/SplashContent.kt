@@ -1,4 +1,4 @@
-package ru.mavrinvladislav.shifttask2025.splash.splash.presentation
+package ru.mavrinvladislav.shifttask2025.splash.presentation
 
 import androidx.compose.runtime.Composable
 

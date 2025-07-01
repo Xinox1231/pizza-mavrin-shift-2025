@@ -4,7 +4,7 @@ import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
 import ru.mavrinvladislav.shifttask2025.authorization.presentation.AuthorizationComponent
 import ru.mavrinvladislav.shifttask2025.main_screen.MainComponent
-import ru.mavrinvladislav.shifttask2025.splash.splash.presentation.SplashComponent
+import ru.mavrinvladislav.shifttask2025.splash.presentation.SplashComponent
 
 interface RootComponent {
     val childStack: Value<ChildStack<*, RootChild>>
