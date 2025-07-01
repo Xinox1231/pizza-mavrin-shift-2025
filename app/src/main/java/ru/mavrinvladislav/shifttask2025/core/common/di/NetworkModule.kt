@@ -12,7 +12,7 @@ interface NetworkModule {
 
     companion object {
 
-        private const val BASE_URL = "https://shift-intensive.ru/api/pizza/"
+        private const val BASE_URL = "https://shift-intensive.ru/api/"
 
         @Provides
         @ApplicationScope
