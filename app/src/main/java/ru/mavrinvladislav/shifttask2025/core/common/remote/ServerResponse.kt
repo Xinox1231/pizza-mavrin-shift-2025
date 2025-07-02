@@ -1,6 +1,7 @@
 package ru.mavrinvladislav.shifttask2025.core.common.remote
 
-sealed class ServerResponse<out T> {
-    data class Success<out T>(val data: T) : ServerResponse<T>()
-    data class Failure(val reason: String) : ServerResponse<Nothing>()
-}
+data class ServerResponse<T>(
+    val success: Boolean,
+    val reason: String?,
+    val data: T? // должен быть nullable, чтобы корректно обрабатывать
+)
