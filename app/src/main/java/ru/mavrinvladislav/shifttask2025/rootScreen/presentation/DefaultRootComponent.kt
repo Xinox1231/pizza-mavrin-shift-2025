@@ -18,6 +18,7 @@ import ru.mavrinvladislav.shifttask2025.authorization.domain.model.AuthState
 import ru.mavrinvladislav.shifttask2025.authorization.domain.use_case.IsAuthorizedUseCase
 import ru.mavrinvladislav.shifttask2025.authorization.presentation.DefaultAuthorizationComponent
 import ru.mavrinvladislav.shifttask2025.core.common.EventBusController
+import ru.mavrinvladislav.shifttask2025.core.common.decompose.clearStackAndPushConfig
 import ru.mavrinvladislav.shifttask2025.core.common.decompose.componentScope
 import ru.mavrinvladislav.shifttask2025.core.presentation.AppEvent
 import ru.mavrinvladislav.shifttask2025.main_screen.DefaultMainComponent
@@ -37,7 +38,7 @@ class DefaultRootComponent @AssistedInject constructor(
 
     private val scope = componentScope()
 
-    private val startScreen = RootConfig.Splash
+    private val startScreen = RootConfig.Authorization
 
     override val childStack: Value<ChildStack<*, RootChild>> = childStack(
         source = navigation,
@@ -48,14 +49,7 @@ class DefaultRootComponent @AssistedInject constructor(
 
     init {
         scope.launch {
-            //Проверка на входе, есть ли токен
-            isAuthorizedUseCase()
-                .collectLatest { authState ->
-                    when (authState) {
-                        AuthState.Authorized -> onAuthorized()
-                        AuthState.UnAuthorized -> onUnAuthorized()
-                    }
-                }
+            checkTokenExistence()
         }
 
         scope.launch {
@@ -74,9 +68,18 @@ class DefaultRootComponent @AssistedInject constructor(
         }
     }
 
+    private suspend fun checkTokenExistence() {
+        isAuthorizedUseCase()
+            .collectLatest { authState ->
+                when (authState) {
+                    AuthState.Authorized -> onAuthorized()
+                    AuthState.UnAuthorized -> onUnAuthorized()
+                }
+            }
+    }
+
     private fun onAuthorized() {
-        //Удаляем Authorization и восстанавливаем стек
-        navigation.bringToFront(RootConfig.Main)
+        navigation.clearStackAndPushConfig(RootConfig.Main)
     }
 
     private fun onUnAuthorized() {
@@ -90,7 +93,8 @@ class DefaultRootComponent @AssistedInject constructor(
         return when (config) {
             is RootConfig.Authorization -> {
                 val component = authorizationComponentFactory.create(
-                    componentContext = componentContext
+                    componentContext = componentContext,
+                    onCloseClicked = {}
                 )
                 RootChild.Authorization(component)
             }
