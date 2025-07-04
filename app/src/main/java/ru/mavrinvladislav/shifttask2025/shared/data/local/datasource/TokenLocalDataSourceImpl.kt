@@ -7,12 +7,7 @@ import javax.inject.Inject
 class TokenLocalDataSourceImpl @Inject constructor(
     private val localStorage: TokenStorage
 ) : TokenLocalDataSource {
-    override fun saveAccessToken(token: String): Either<Unit, String> {
-        try {
-            localStorage.saveAccessToken(token)
-            return Either.Success(Unit)
-        } catch (e: Exception) {
-            return Either.Failure(e.localizedMessage ?: "Unknown")
-        }
+    override fun saveAccessToken(token: String) {
+        localStorage.saveAccessToken(token)
     }
 }
