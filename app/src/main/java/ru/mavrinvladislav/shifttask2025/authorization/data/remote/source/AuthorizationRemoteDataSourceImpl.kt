@@ -23,7 +23,7 @@ class AuthorizationRemoteDataSourceImpl @Inject constructor(
         )
     }
 
-    override suspend fun createOtp(phoneNumber: String): Double {
+    override suspend fun createOtp(phoneNumber: String): Long {
         val request = CreateOtpRequest(phoneNumber)
         val response = authorizationService.createOtp(request)
 
