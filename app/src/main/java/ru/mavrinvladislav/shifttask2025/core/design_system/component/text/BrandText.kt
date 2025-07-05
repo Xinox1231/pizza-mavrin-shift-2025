@@ -54,11 +54,24 @@ fun BrandText(
                 style = ShiftTheme.typography.regular_16
             )
         }
+
+        TextStyle.BOTTOM_BAR -> {
+            Text(
+                text = text,
+                modifier = modifier,
+                color = color,
+                textAlign = textAlign,
+                maxLines = maxLines,
+                overflow = overflow,
+                style = ShiftTheme.typography.bottom
+            )
+        }
     }
 }
 
 enum class TextStyle {
     TITLE_H2,
     REGULAR_16,
-    BUTTON
+    BUTTON,
+    BOTTOM_BAR
 }
