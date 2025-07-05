@@ -6,13 +6,14 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import ru.mavrinvladislav.shifttask2025.BuildConfig
 
 @Module
 interface NetworkModule {
 
     companion object {
 
-        private const val BASE_URL = "https://shift-intensive.ru/api/"
+        private const val BASE_URL = BuildConfig.BASE_URL
 
         @Provides
         @ApplicationScope

@@ -1,3 +1,5 @@
+import com.android.build.api.variant.BuildConfigField
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -39,8 +41,25 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
+
+androidComponents {
+    val baseUrl = property("baseUrl")?.toString() ?: error(
+        "You should put base_url " +
+                "into gradle.properties"
+    )
+
+    onVariants { variant ->
+        variant.buildConfigFields.put(
+            "BASE_URL",
+            BuildConfigField("String", "\"$baseUrl\"", "Base url request")
+        )
+    }
+}
+
+
 
 dependencies {
 
@@ -90,4 +109,5 @@ dependencies {
 
     //Coil
     implementation(libs.coil)
+    implementation(libs.accompanist.placeholder.material)
 }
