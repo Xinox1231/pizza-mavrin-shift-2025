@@ -65,6 +65,10 @@ class DefaultOtpInputComponent @AssistedInject constructor(
                     is OtpInputStore.Label.RequestOtpSucceed -> {
                         _event.send(OtpInputEvent.SuccessfulRequestOtp)
                     }
+
+                    is OtpInputStore.Label.HideKeyboard -> {
+                        _event.send(OtpInputEvent.HideKeyBoard)
+                    }
                 }
             }
         }

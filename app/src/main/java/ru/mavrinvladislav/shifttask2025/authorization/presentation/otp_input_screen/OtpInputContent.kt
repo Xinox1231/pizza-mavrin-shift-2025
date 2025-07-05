@@ -1,5 +1,6 @@
 package ru.mavrinvladislav.shifttask2025.authorization.presentation.otp_input_screen
 
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -24,6 +25,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.mavrinvladislav.shifttask2025.R
@@ -71,6 +73,8 @@ fun OtpInputScreen(component: OtpInputComponent) {
 
             val model by component.model.collectAsState()
 
+            val keyboardController = LocalSoftwareKeyboardController.current
+
             LaunchedEffect(Unit) {
                 component.event.collect {
                     with(context) {
@@ -111,6 +115,10 @@ fun OtpInputScreen(component: OtpInputComponent) {
                                     getString(R.string.login_request_success),
                                     Toast.LENGTH_SHORT
                                 ).show()
+                            }
+
+                            is OtpInputEvent.HideKeyBoard -> {
+                                keyboardController?.hide()
                             }
                         }
                     }

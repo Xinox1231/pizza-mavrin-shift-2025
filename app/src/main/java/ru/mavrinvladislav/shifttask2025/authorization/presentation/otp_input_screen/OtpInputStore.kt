@@ -1,11 +1,13 @@
 package ru.mavrinvladislav.shifttask2025.authorization.presentation.otp_input_screen
 
+import android.util.Log
 import com.arkivanov.mvikotlin.core.store.Reducer
 import com.arkivanov.mvikotlin.core.store.Store
 import com.arkivanov.mvikotlin.core.store.StoreFactory
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineBootstrapper
 import com.arkivanov.mvikotlin.extensions.coroutines.CoroutineExecutor
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.delay
@@ -56,6 +58,8 @@ interface OtpInputStore : Store<Intent, State, Label> {
         data class RequestOtpFailure(val reason: String) : Label
 
         data class ErrorSignIn(val reason: String) : Label
+
+        data object HideKeyboard : Label
     }
 }
 
@@ -119,6 +123,7 @@ class OtpInputStoreFactory @Inject constructor(
                             )
                         }
                     scope.launch(coroutineExceptionHandler + SupervisorJob()) {
+                        publish(Label.HideKeyboard)
                         dispatch(Msg.LoadingStarted)
                         val state = getState()
                         try {
@@ -191,7 +196,7 @@ class OtpInputStoreFactory @Inject constructor(
             when (msg) {
                 is Msg.OtpCodeUpdated -> {
                     copy(
-                        otpCode = otpCode
+                        otpCode = msg.newOtp
                     )
                 }
 
