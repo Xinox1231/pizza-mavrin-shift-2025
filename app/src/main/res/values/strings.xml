@@ -11,4 +11,19 @@
     <string name="login_request_success">Успешный вход в аккаунт</string>
     <string name="otp_request_er">Ошибка запроса отп: %s</string>
     <string name="otp_request_success">Успешный запрос отп</string>
+
+    <!-- Pizza -->
+    <string name="pizza">Пицца</string>
+
+    <!-- Orders -->
+    <string name="orders">Заказы</string>
+
+    <!-- TrashCan -->
+    <string name="trash_can">Корзина</string>
+
+    <!-- Profile -->
+    <string name="profile">Профиль</string>
+
+
+
 </resources>
