@@ -7,9 +7,9 @@ interface AuthorizationRepository {
     suspend fun signIn(
         phoneNumber: String,
         otpCode: String
-    )
+    ): Either<Unit, String>
 
     suspend fun createOtp(
         phoneNumber: String
-    ): Int
+    ): Either<Double, String>
 }

@@ -6,7 +6,7 @@ data class SignInResponse(
     @SerializedName("success")
     val success: Boolean,
     @SerializedName("reason")
-    val reason: String,
+    val reason: String?,
     @SerializedName("token")
-    val token: String
+    val token: String?
 )

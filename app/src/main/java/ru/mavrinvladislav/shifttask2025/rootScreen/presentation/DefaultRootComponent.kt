@@ -1,11 +1,12 @@
 package ru.mavrinvladislav.shifttask2025.rootScreen.presentation
 
-import android.util.Log
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
+import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.push
+import com.arkivanov.decompose.router.stack.replaceCurrent
 import com.arkivanov.decompose.value.Value
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -13,9 +14,10 @@ import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
+import ru.mavrinvladislav.shifttask2025.authorization.domain.model.AuthState
+import ru.mavrinvladislav.shifttask2025.authorization.domain.use_case.IsAuthorizedUseCase
 import ru.mavrinvladislav.shifttask2025.authorization.presentation.DefaultAuthorizationComponent
 import ru.mavrinvladislav.shifttask2025.core.common.EventBusController
-import ru.mavrinvladislav.shifttask2025.core.common.decompose.clearStackAndPushConfig
 import ru.mavrinvladislav.shifttask2025.core.common.decompose.componentScope
 import ru.mavrinvladislav.shifttask2025.core.presentation.AppEvent
 import ru.mavrinvladislav.shifttask2025.main_screen.DefaultMainComponent
@@ -26,6 +28,7 @@ class DefaultRootComponent @AssistedInject constructor(
     private val authorizationComponentFactory: DefaultAuthorizationComponent.Factory,
     private val mainComponentFactory: DefaultMainComponent.Factory,
     private val splashComponentFactory: DefaultSplashComponent.Factory,
+    private val isAuthorizedUseCase: IsAuthorizedUseCase,
     @Assisted("componentContext")
     componentContext: ComponentContext,
 ) : RootComponent, ComponentContext by componentContext {
@@ -34,7 +37,7 @@ class DefaultRootComponent @AssistedInject constructor(
 
     private val scope = componentScope()
 
-    private val startScreen = RootConfig.Authorization
+    private val startScreen = RootConfig.Splash
 
     override val childStack: Value<ChildStack<*, RootChild>> = childStack(
         source = navigation,
@@ -45,26 +48,38 @@ class DefaultRootComponent @AssistedInject constructor(
 
     init {
         scope.launch {
+            //Проверка на входе, есть ли токен
+            isAuthorizedUseCase()
+                .collectLatest { authState ->
+                    when (authState) {
+                        AuthState.Authorized -> onAuthorized()
+                        AuthState.UnAuthorized -> onUnAuthorized()
+                    }
+                }
+        }
+
+        scope.launch {
             eventBusController.eventBus
                 .collectLatest {
                     when (it) {
                         AppEvent.LOGOUT -> {
-                            openAuthorization()
+                            onUnAuthorized()
                         }
 
                         AppEvent.AUTHORIZE -> {
-                            openMain()
+                            onAuthorized()
                         }
                     }
                 }
         }
     }
 
-    private fun openMain() {
-        navigation.clearStackAndPushConfig(RootConfig.Main)
+    private fun onAuthorized() {
+        //Удаляем Authorization и восстанавливаем стек
+        navigation.bringToFront(RootConfig.Main)
     }
 
-    private fun openAuthorization() {
+    private fun onUnAuthorized() {
         navigation.push(RootConfig.Authorization)
     }
 
@@ -75,10 +90,7 @@ class DefaultRootComponent @AssistedInject constructor(
         return when (config) {
             is RootConfig.Authorization -> {
                 val component = authorizationComponentFactory.create(
-                    componentContext = componentContext,
-                    onCloseClicked = {
-                        openMain()
-                    }
+                    componentContext = componentContext
                 )
                 RootChild.Authorization(component)
             }
@@ -93,10 +105,10 @@ class DefaultRootComponent @AssistedInject constructor(
             is RootConfig.Splash -> {
                 val component = splashComponentFactory.create(
                     onAuthorized = {
-                        openMain()
+                        onAuthorized()
                     },
                     onUnAuthorized = {
-                        openAuthorization()
+                        onUnAuthorized()
                     },
                     componentContext = componentContext
                 )

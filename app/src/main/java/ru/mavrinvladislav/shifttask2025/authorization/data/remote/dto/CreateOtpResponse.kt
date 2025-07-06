@@ -6,7 +6,7 @@ data class CreateOtpResponse(
     @SerializedName("success")
     val success: Boolean,
     @SerializedName("reason")
-    val reason: String,
+    val reason: String?,
     @SerializedName("retryDelay")
-    val retryDelay: Long
+    val retryDelay: Double?
 )
