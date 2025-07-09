@@ -5,6 +5,7 @@ import dagger.BindsInstance
 import dagger.Component
 import ru.mavrinvladislav.shifttask2025.MainActivity
 import ru.mavrinvladislav.shifttask2025.authorization.di.AuthorizationModule
+import ru.mavrinvladislav.shifttask2025.pizza.di.PizzaModule
 import ru.mavrinvladislav.shifttask2025.shared.di.TokenStorageModule
 
 @ApplicationScope
@@ -12,6 +13,8 @@ import ru.mavrinvladislav.shifttask2025.shared.di.TokenStorageModule
     modules = [
         NetworkModule::class,
         PresentationModule::class,
+        NetworkModule::class,
+        PizzaModule::class,
         AuthorizationModule::class,
         TokenStorageModule::class
     ]
