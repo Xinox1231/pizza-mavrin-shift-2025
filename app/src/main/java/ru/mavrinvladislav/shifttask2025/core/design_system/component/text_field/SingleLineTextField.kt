@@ -1,10 +1,6 @@
 package ru.mavrinvladislav.shifttask2025.core.design_system.component.text_field
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -23,7 +19,6 @@ fun SingleLineTextInput(
     shape: RoundedCornerShape = RoundedCornerShape(16.dp),
     singleLine: Boolean = true,
     readOnly: Boolean = false,
-
     onTextChange: (String) -> Unit,
 ) {
     OutlinedTextField(

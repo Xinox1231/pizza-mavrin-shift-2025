@@ -6,5 +6,6 @@ sealed interface OtpInputEvent {
     data object SuccessfulSignIn : OtpInputEvent
     data class ErrorRequestOtp(val reason: String) : OtpInputEvent
     data object SuccessfulRequestOtp : OtpInputEvent
+    data object HideKeyBoard : OtpInputEvent
 
 }

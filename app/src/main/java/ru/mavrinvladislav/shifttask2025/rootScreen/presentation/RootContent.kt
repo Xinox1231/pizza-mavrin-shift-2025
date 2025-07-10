@@ -4,7 +4,7 @@ import android.util.Log
 import androidx.compose.runtime.Composable
 import com.arkivanov.decompose.extensions.compose.jetpack.subscribeAsState
 import ru.mavrinvladislav.shifttask2025.authorization.presentation.AuthorizationContent
-import ru.mavrinvladislav.shifttask2025.main_screen.MainContent
+import ru.mavrinvladislav.shifttask2025.main_component.MainContent
 import ru.mavrinvladislav.shifttask2025.splash.presentation.SplashContent
 
 @Composable

@@ -1,14 +1,63 @@
 <resources>
     <string name="app_name">ShiftTask2025</string>
+
+    <string name="retry">Повторить</string>
+
+    <!-- Authorization -->
     <string name="phone">Телефон</string>
     <string name="next">Продолжить</string>
     <string name="authorization">Авторизация</string>
-    <string name="otp_request_text">Запросить код повторно можно через %d секунд</string>
+    <string name="otp_request_cooldown">Запросить код повторно можно через %d секунд</string>
     <string name="successful_otp_request">Мы отправили смс с кодом на номер: %s</string>
-    <string name="phone_input_instuction">Введите номер телефона для входа в личный кабинет</string>
-    <string name="otp_input">Введите отп код</string>
+    <string name="phone_input_instruction">Введите номер телефона для входа в личный кабинет</string>
+    <string name="otp_input_instruction">Введите отп код</string>
     <string name="login_request_er">Ошибка запроса входа: %s</string>
     <string name="login_request_success">Успешный вход в аккаунт</string>
     <string name="otp_request_er">Ошибка запроса отп: %s</string>
     <string name="otp_request_success">Успешный запрос отп</string>
+
+    <!-- Pizza -->
+    <string name="pizza">Пицца</string>
+    <string name="pizza_start_price">От %d ₽</string>
+    <string name="price">%d ₽</string>
+    <string name="pizza_add_to_cart">Добавить в корзину</string>
+
+    <string name="pizza_add_toppings">Добавить по вкусу</string>
+
+    <string name="pizza_dough_thin">Тонкое</string>
+    <string name="pizza_dough_thick">Толстое</string>
+
+    <string name="pizza_size_small">Маленькая</string>
+    <string name="pizza_size_medium">Средняя</string>
+    <string name="pizza_size_large">Большая</string>
+
+    <string name="pizza_pineapple">Ананас</string>
+    <string name="pizza_mozzarella">Моцарелла</string>
+    <string name="pizza_peperoni">Пепперони</string>
+    <string name="pizza_green_pepper">Зелёный перец</string>
+    <string name="pizza_mushrooms">Грибы</string>
+    <string name="pizza_basil">Базилик</string>
+    <string name="pizza_cheddar">Чеддер</string>
+    <string name="pizza_parmesan">Пармезан</string>
+    <string name="pizza_feta">Фета</string>
+    <string name="pizza_ham">Ветчина</string>
+    <string name="pizza_pickle">Огурец</string>
+    <string name="pizza_tomato">Томат</string>
+    <string name="pizza_bacon">Бекон</string>
+    <string name="pizza_onion">Лук</string>
+    <string name="pizza_chile">Чили</string>
+    <string name="pizza_shrimps">Креветки</string>
+    <string name="pizza_chicken_fillet">Куриное филе</string>
+    <string name="pizza_meatballs">Фрикадельки</string>
+
+    <!-- Orders -->
+    <string name="orders">Заказы</string>
+
+    <!-- Cart -->
+    <string name="trash_can">Корзина</string>
+
+    <!-- Profile -->
+    <string name="profile">Профиль</string>
+
+
 </resources>
