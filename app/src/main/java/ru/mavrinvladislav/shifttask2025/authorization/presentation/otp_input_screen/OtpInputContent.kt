@@ -142,7 +142,7 @@ fun OtpInputScreen(component: OtpInputComponent) {
                     onTextChange = {
                         component.updateOtp(it)
                     },
-                    placeholderText = stringResource(R.string.otp_input)
+                    placeholderText = stringResource(R.string.otp_input_instruction)
                 )
                 Spacer(modifier = Modifier.size(24.dp))
 
@@ -171,7 +171,7 @@ fun OtpInputScreen(component: OtpInputComponent) {
                     is OtpInputStore.State.CoolDownState.Waiting -> {
                         BrandText(
                             text = String.format(
-                                stringResource(R.string.otp_request_text),
+                                stringResource(R.string.otp_request_cooldown),
                                 state.retryDelay
                             ),
                             textStyle = TextStyle.REGULAR_16

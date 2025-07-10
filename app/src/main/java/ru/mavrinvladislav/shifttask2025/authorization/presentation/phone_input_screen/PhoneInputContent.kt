@@ -79,7 +79,7 @@ fun PhoneInputScreen(component: PhoneInputComponent) {
             ) {
 
                 BrandText(
-                    text = stringResource(R.string.phone_input_instuction),
+                    text = stringResource(R.string.phone_input_instruction),
                     textStyle = TextStyle.REGULAR_16,
                 )
 

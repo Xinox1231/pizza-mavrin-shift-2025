@@ -8,15 +8,15 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.serialization.Serializable
-import ru.mavrinvladislav.shifttask2025.orders.DefaultOrdersComponent
+import ru.mavrinvladislav.shifttask2025.cart.presentation.DefaultCartComponent
+import ru.mavrinvladislav.shifttask2025.orders.presentation.DefaultOrdersComponent
 import ru.mavrinvladislav.shifttask2025.pizza.DefaultPizzaComponent
-import ru.mavrinvladislav.shifttask2025.profile.DefaultProfileComponent
-import ru.mavrinvladislav.shifttask2025.trash_can.DefaultTrashCanComponent
+import ru.mavrinvladislav.shifttask2025.profile.presentation.DefaultProfileComponent
 
 class DefaultMainComponent @AssistedInject constructor(
     private val pizzaComponentFactory: DefaultPizzaComponent.Factory,
     private val ordersComponentFactory: DefaultOrdersComponent.Factory,
-    private val trashCanComponentFactory: DefaultTrashCanComponent.Factory,
+    private val trashCanComponentFactory: DefaultCartComponent.Factory,
     private val profileComponentFactory: DefaultProfileComponent.Factory,
     @Assisted("componentContext")
     componentContext: ComponentContext
@@ -30,7 +30,6 @@ class DefaultMainComponent @AssistedInject constructor(
         initialConfiguration = MainConfig.Pizza,
         childFactory = ::child
     )
-
 
     override fun onTabSelected(tab: MainTab) {
         val configuration = tab.toConfiguration()

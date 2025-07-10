@@ -10,4 +10,7 @@ class TokenLocalDataSourceImpl @Inject constructor(
     override fun saveAccessToken(token: String) {
         localStorage.saveAccessToken(token)
     }
+
+    override fun getAccessToken(): String? = localStorage.getAccessToken()
+
 }

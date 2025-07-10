@@ -1,14 +1,14 @@
-package ru.mavrinvladislav.shifttask2025.main_screen
+package ru.mavrinvladislav.shifttask2025.profile.presentation.edit
 
 import com.arkivanov.decompose.ComponentContext
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 
-class DefaultMainComponent @AssistedInject constructor(
+class DefaultProfileEditComponent @AssistedInject constructor(
     @Assisted("componentContext")
     componentContext: ComponentContext
-) : MainComponent {
+) : ProfileEditComponent {
 
     @AssistedFactory
     interface Factory {
@@ -16,6 +16,6 @@ class DefaultMainComponent @AssistedInject constructor(
         fun create(
             @Assisted("componentContext")
             componentContext: ComponentContext
-        ): DefaultMainComponent
+        ): DefaultProfileEditComponent
     }
 }

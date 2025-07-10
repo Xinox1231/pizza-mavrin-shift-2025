@@ -1,9 +1,9 @@
 package ru.mavrinvladislav.shifttask2025.rootScreen.presentation
 
-import android.util.Log
 import com.arkivanov.decompose.ComponentContext
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.router.stack.StackNavigation
+import com.arkivanov.decompose.router.stack.bringToFront
 import com.arkivanov.decompose.router.stack.childStack
 import com.arkivanov.decompose.router.stack.push
 import com.arkivanov.decompose.value.Value
@@ -18,7 +18,7 @@ import ru.mavrinvladislav.shifttask2025.core.common.EventBusController
 import ru.mavrinvladislav.shifttask2025.core.common.decompose.clearStackAndPushConfig
 import ru.mavrinvladislav.shifttask2025.core.common.decompose.componentScope
 import ru.mavrinvladislav.shifttask2025.core.presentation.AppEvent
-import ru.mavrinvladislav.shifttask2025.main_screen.DefaultMainComponent
+import ru.mavrinvladislav.shifttask2025.main_component.DefaultMainComponent
 import ru.mavrinvladislav.shifttask2025.splash.presentation.DefaultSplashComponent
 
 class DefaultRootComponent @AssistedInject constructor(
@@ -61,11 +61,11 @@ class DefaultRootComponent @AssistedInject constructor(
     }
 
     private fun openMain() {
-        navigation.clearStackAndPushConfig(RootConfig.Main)
+        navigation.bringToFront(RootConfig.Main)
     }
 
     private fun openAuthorization() {
-        navigation.push(RootConfig.Authorization)
+        navigation.bringToFront(RootConfig.Authorization)
     }
 
     fun child(

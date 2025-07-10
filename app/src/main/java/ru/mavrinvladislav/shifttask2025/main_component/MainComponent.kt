@@ -2,10 +2,10 @@ package ru.mavrinvladislav.shifttask2025.main_component
 
 import com.arkivanov.decompose.router.stack.ChildStack
 import com.arkivanov.decompose.value.Value
-import ru.mavrinvladislav.shifttask2025.orders.OrdersComponent
+import ru.mavrinvladislav.shifttask2025.cart.presentation.CartComponent
+import ru.mavrinvladislav.shifttask2025.orders.presentation.OrdersComponent
 import ru.mavrinvladislav.shifttask2025.pizza.PizzaComponent
-import ru.mavrinvladislav.shifttask2025.profile.ProfileComponent
-import ru.mavrinvladislav.shifttask2025.trash_can.TrashCanComponent
+import ru.mavrinvladislav.shifttask2025.profile.presentation.ProfileComponent
 
 interface MainComponent {
 
@@ -20,7 +20,7 @@ sealed interface MainChild {
 
     data class Orders(val component: OrdersComponent) : MainChild
 
-    data class TrashCan(val component: TrashCanComponent) : MainChild
+    data class TrashCan(val component: CartComponent) : MainChild
 
     data class Profile(val component: ProfileComponent) : MainChild
 }

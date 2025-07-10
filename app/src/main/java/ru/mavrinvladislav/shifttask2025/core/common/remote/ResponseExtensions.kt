@@ -3,13 +3,19 @@ package ru.mavrinvladislav.shifttask2025.core.common.remote
 import retrofit2.HttpException
 import retrofit2.Response
 import ru.mavrinvladislav.shifttask2025.core.common.util.AuthorizationException
+import ru.mavrinvladislav.shifttask2025.core.common.util.UnAuthorizedException
 
 inline fun <T, R> Response<T>.handleResponse(
     crossinline isSuccess: (T) -> Boolean,
     crossinline getReason: (T) -> String,
     crossinline extract: (T) -> R
 ): R {
-    if (!isSuccessful) throw HttpException(this)
+    if (!isSuccessful) {
+        if (code() == 401) {
+            throw UnAuthorizedException("Session expired (HTTP 401)")
+        }
+        throw HttpException(this)
+    }
 
     val body = body() ?: throw NullPointerException("Response body is null")
 
